@@ -51,6 +51,17 @@
 
 (defun score (dice)
   ; You need to write this method
+  (if dice
+    (loop for dice-num from 1 to 6
+      collect (count dice-num dice) into counts
+      finally (return (+
+        (+ (* 100 (mod (nth 0 counts) 3)) (* 1000 (floor (/ (nth 0 counts) 3))))
+        (* 200 (floor (/ (nth 1 counts) 3)))
+        (* 300 (floor (/ (nth 2 counts) 3)))
+        (* 400 (floor (/ (nth 3 counts) 3)))
+        (+ (* 50 (mod (nth 4 counts) 3)) (* 500 (floor (/ (nth 4 counts) 3))))
+        (* 600 (floor (/ (nth 5 counts) 3))))))
+    0)
 )
 
 (define-test test-score-of-an-empty-list-is-zero
